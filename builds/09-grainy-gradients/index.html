@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nightfall FM, radio for the small hours</title>
+<meta name="description" content="Nightfall FM is a late-night radio station with five stations on one dial. Turn the dial, hear the static, play real songs from a playlist on each station, and save the grain as a poster.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%232a1a16'/%3E%3Ccircle cx='16' cy='16' r='9' fill='%23e8745c'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,700&display=swap">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="container nav__row">
+    <a class="wordmark" href="#top" aria-label="Nightfall FM, back to the top">Nightfall FM</a>
+    <nav class="tuner" aria-label="Stations">
+      <div class="tuner__scale" data-tuner>
+        <span class="tuner__needle" data-needle aria-hidden="true"></span>
+        <button type="button" class="tuner__mark" data-tune="0" style="--at:6.5%" aria-label="Tune to 89.3, Last Tram Home">89.3</button>
+        <button type="button" class="tuner__mark" data-tune="1" style="--at:25.5%" aria-label="Tune to 93.1, Kitchen Light">93.1</button>
+        <button type="button" class="tuner__mark" data-tune="2" style="--at:47.5%" aria-label="Tune to 97.5, The Long Quiet">97.5</button>
+        <button type="button" class="tuner__mark" data-tune="3" style="--at:66%" aria-label="Tune to 101.2, Request Hour">101.2</button>
+        <button type="button" class="tuner__mark" data-tune="4" style="--at:89%" aria-label="Tune to 105.8, First Bus">105.8</button>
+      </div>
+    </nav>
+    <a class="btn btn--ghost nav__cta" href="#request">Request a song</a>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- 1 to 4: the split stage. Left column scrolls, the field on the right stays. -->
+<div class="container stage" id="stage">
+
+  <section class="panel hero" id="top">
+    <h1>Radio for the small hours.</h1>
+    <p class="lead">Nightfall FM broadcasts from ten at night until the first bus.</p>
+    <a class="btn" href="#request">Request a song</a>
+  </section>
+
+  <div class="field" data-field>
+    <canvas class="field__gl" data-gl aria-hidden="true"></canvas>
+    <div class="field__grain" data-grain aria-hidden="true"></div>
+    <div class="field__ui">
+      <div class="dial" data-dial role="slider" tabindex="0" aria-label="Tuning dial" aria-valuemin="88" aria-valuemax="108" aria-valuenow="101.2" aria-valuetext="101.2 megahertz, Request Hour">
+        <svg viewBox="0 0 400 400" aria-hidden="true" focusable="false">
+          <circle class="d-plate" cx="200" cy="200" r="198"/>
+          <g class="d-ticks" data-ticks></g>
+          <g data-needle-svg><path class="d-needle" d="M200 4 L191 24 L209 24 Z"/></g>
+          <g data-knob>
+            <circle class="d-knob" cx="200" cy="200" r="132"/>
+            <circle class="d-ridges" cx="200" cy="200" r="123" pathLength="48" stroke-dasharray="0.42 0.58"/>
+            <circle class="d-knob-in" cx="200" cy="200" r="104"/>
+            <rect class="d-mark" x="193" y="86" width="14" height="40" rx="3"/>
+            <circle class="d-dot" cx="200" cy="148" r="5"/>
+          </g>
+          <circle class="d-cap" cx="200" cy="200" r="72"/>
+          <text class="d-read" x="200" y="214" text-anchor="middle" data-read>101.2</text>
+          <text class="d-fm" x="200" y="244" text-anchor="middle">FM</text>
+        </svg>
+      </div>
+      <p class="chip" data-chip aria-hidden="true">Request Hour</p>
+      <p class="sr-only" role="status" data-live></p>
+      <div class="field__steps">
+        <button type="button" class="btn btn--dark" data-step="-1">Previous station</button>
+        <button type="button" class="btn btn--dark" data-step="1">Next station</button>
+        <button type="button" class="btn btn--dark sound" data-sound aria-pressed="false"><span class="sound__dot" aria-hidden="true"></span><span data-sound-txt>Sound off</span></button>
+      </div>
+      <div class="sound-panel">
+        <label class="vol"><span>Volume</span><input type="range" min="0" max="100" value="60" data-vol aria-label="Volume"></label>
+        <p class="np" data-now-playing role="status">Sound is off. Press the button to hear the station.</p>
+      </div>
+      <p class="field__hint"><span class="mouse-only">Drag the dial, or press the arrow keys.</span><span class="touch-only">Turn the dial with your finger.</span></p>
+    </div>
+  </div>
+
+  <section class="panel stations" id="stations" aria-labelledby="h-stations">
+    <h2 id="h-stations">Five stations after dark.</h2>
+    <p class="lead">Scroll and the dial retunes to the station in the middle of the screen.</p>
+    <ol class="stns">
+      <li class="stn" data-station="0">
+        <div class="stn__head"><span class="stn__f">89.3</span><h3>Last Tram Home</h3><span class="swatch grain st1" aria-hidden="true"></span></div>
+        <dl class="stn__facts">
+          <div><dt>Host</dt><dd>Marlo Quist</dd></div>
+          <div><dt>On air</dt><dd>22:00 to 00:00</dd></div>
+          <div hidden data-station-facts><dt>Playlist</dt><dd data-station-count="0"></dd></div>
+        </dl>
+        <p>Soft records picked for a long ride home: slow soul, quiet piano, old songs about leaving places. Marlo reads the last timetable notes of the day between records and never talks over an intro.</p>
+        <button type="button" class="btn btn--ghost" data-tune="0">Tune the dial to 89.3</button>
+      </li>
+      <li class="stn" data-station="1">
+        <div class="stn__head"><span class="stn__f">93.1</span><h3>Kitchen Light</h3><span class="swatch grain st2" aria-hidden="true"></span></div>
+        <dl class="stn__facts">
+          <div><dt>Host</dt><dd>Dessa Ibarra</dd></div>
+          <div><dt>On air</dt><dd>00:00 to 01:30</dd></div>
+          <div hidden data-station-facts><dt>Playlist</dt><dd data-station-count="1"></dd></div>
+        </dl>
+        <p>Talk and music for people who are up for a reason: bakers, nurses, drivers, parents with a pan on. Listeners write in what is on their stove, and Dessa answers each one with a song.</p>
+        <button type="button" class="btn btn--ghost" data-tune="1">Tune the dial to 93.1</button>
+      </li>
+      <li class="stn" data-station="2">
+        <div class="stn__head"><span class="stn__f">97.5</span><h3>The Long Quiet</h3><span class="swatch grain st3" aria-hidden="true"></span></div>
+        <dl class="stn__facts">
+          <div><dt>Host</dt><dd>Teodor Pell</dd></div>
+          <div><dt>On air</dt><dd>01:30 to 03:00</dd></div>
+          <div hidden data-station-facts><dt>Playlist</dt><dd data-station-count="2"></dd></div>
+        </dl>
+        <p>Ambient sets with the talking cut out: long tones, field recordings, rooms with the door closed. Teodor speaks twice in the whole show, once to start and once to say goodnight.</p>
+        <button type="button" class="btn btn--ghost" data-tune="2">Tune the dial to 97.5</button>
+      </li>
+      <li class="stn" data-station="3">
+        <div class="stn__head"><span class="stn__f">101.2</span><h3>Request Hour</h3><span class="swatch grain st4" aria-hidden="true"></span></div>
+        <dl class="stn__facts">
+          <div><dt>Host</dt><dd>Wren Adeyemi</dd></div>
+          <div><dt>On air</dt><dd>03:00 to 04:30</dd></div>
+          <div hidden data-station-facts><dt>Playlist</dt><dd data-station-count="3"></dd></div>
+        </dl>
+        <p>Listeners ask for the one song they need, and Wren reads the card before she plays it. Songs run in full, so a request is a few minutes of the whole room listening with you.</p>
+        <button type="button" class="btn btn--ghost" data-tune="3">Tune the dial to 101.2</button>
+      </li>
+      <li class="stn" data-station="4">
+        <div class="stn__head"><span class="stn__f">105.8</span><h3>First Bus</h3><span class="swatch grain st5" aria-hidden="true"></span></div>
+        <dl class="stn__facts">
+          <div><dt>Host</dt><dd>Cass Orlov</dd></div>
+          <div><dt>On air</dt><dd>04:30 to 06:00</dd></div>
+          <div hidden data-station-facts><dt>Playlist</dt><dd data-station-count="4"></dd></div>
+        </dl>
+        <p>Early light and early songs. Cass gives the weather from the studio window before anything else, then plays records for an empty street until the first bus pulls out.</p>
+        <button type="button" class="btn btn--ghost" data-tune="4">Tune the dial to 105.8</button>
+      </li>
+    </ol>
+  </section>
+
+  <section class="panel library" id="library" aria-labelledby="h-lib" data-lib>
+    <h2 id="h-lib">Your listening room.</h2>
+    <p class="lead">Every station has a playlist of real recordings. Turn the dial to change the channel, then pick any song from it. Likes, queue and playlists stay on this device.</p>
+    <div class="tabs" role="tablist" aria-label="Library">
+      <button type="button" role="tab" id="tab-channel" aria-controls="pn-channel" aria-selected="true" data-tab="channel">This channel</button>
+      <button type="button" role="tab" id="tab-liked" aria-controls="pn-liked" aria-selected="false" tabindex="-1" data-tab="liked">Liked<span data-count="liked"></span></button>
+      <button type="button" role="tab" id="tab-playlists" aria-controls="pn-playlists" aria-selected="false" tabindex="-1" data-tab="playlists">Your playlists</button>
+      <button type="button" role="tab" id="tab-recent" aria-controls="pn-recent" aria-selected="false" tabindex="-1" data-tab="recent">Recent</button>
+      <button type="button" role="tab" id="tab-search" aria-controls="pn-search" aria-selected="false" tabindex="-1" data-tab="search">Search</button>
+      <button type="button" role="tab" id="tab-queue" aria-controls="pn-queue" aria-selected="false" tabindex="-1" data-tab="queue">Queue<span data-count="queue"></span></button>
+    </div>
+    <div class="tabpanel" role="tabpanel" id="pn-channel" aria-labelledby="tab-channel" data-panel="channel"></div>
+    <div class="tabpanel" role="tabpanel" id="pn-liked" aria-labelledby="tab-liked" data-panel="liked" hidden></div>
+    <div class="tabpanel" role="tabpanel" id="pn-playlists" aria-labelledby="tab-playlists" data-panel="playlists" hidden></div>
+    <div class="tabpanel" role="tabpanel" id="pn-recent" aria-labelledby="tab-recent" data-panel="recent" hidden></div>
+    <div class="tabpanel" role="tabpanel" id="pn-search" aria-labelledby="tab-search" data-panel="search" hidden></div>
+    <div class="tabpanel" role="tabpanel" id="pn-queue" aria-labelledby="tab-queue" data-panel="queue" hidden></div>
+    <p class="sr-only" role="status" data-lib-status></p>
+    <noscript><p class="lib__empty">The song list needs JavaScript. The songs are real recordings from Wikimedia Commons and the Internet Archive, under CC0, public domain, CC BY or CC BY-SA licences.</p></noscript>
+    <details class="keys">
+      <summary>Shortcuts</summary>
+      <dl>
+        <div><dt><kbd>Space</kbd></dt><dd>Play or pause</dd></div>
+        <div><dt><kbd>Left</kbd> <kbd>Right</kbd></dt><dd>Back or forward 5 seconds</dd></div>
+        <div><dt><kbd>Shift</kbd> + <kbd>Left</kbd> <kbd>Right</kbd></dt><dd>Previous or next song</dd></div>
+        <div><dt><kbd>M</kbd></dt><dd>Mute</dd></div>
+        <div><dt><kbd>L</kbd></dt><dd>Like the song</dd></div>
+      </dl>
+      <p>They work once the sound is on and the cursor is not in a text box. On the dial, the arrow keys still turn the dial.</p>
+    </details>
+  </section>
+
+  <section class="panel mood" id="mood" aria-labelledby="h-mood">
+    <h2 id="h-mood">What kind of night is it?</h2>
+    <p class="lead">Pick the one that fits. The dial goes there.</p>
+    <fieldset class="mood__set" data-mood>
+      <legend class="sr-only">Kind of night</legend>
+      <label class="mood__opt"><input type="radio" name="mood" value="2"><span>I cannot sleep</span></label>
+      <label class="mood__opt"><input type="radio" name="mood" value="0"><span>Riding home late</span></label>
+      <label class="mood__opt"><input type="radio" name="mood" value="1"><span>Working through the night</span></label>
+      <label class="mood__opt"><input type="radio" name="mood" value="3"><span>There is a song I need</span></label>
+      <label class="mood__opt"><input type="radio" name="mood" value="4"><span>Up before everyone</span></label>
+      <label class="mood__opt"><input type="radio" name="mood" value="clock"><span>I am not sure</span></label>
+    </fieldset>
+    <figure class="mirror" data-mirror-wrap><canvas data-mirror aria-hidden="true"></canvas></figure>
+    <div class="mood__out" data-mood-out aria-live="polite">
+      <p class="mood__why" data-for="2"><strong>The Long Quiet, 97.5.</strong> Nothing here asks you to listen. Long tones and empty rooms give a busy head something slow to follow until it lets go.</p>
+      <p class="mood__why" data-for="0"><strong>Last Tram Home, 89.3.</strong> Records for a window seat. Marlo keeps the pace of a ride, so being tired and still on the move feels like part of the plan.</p>
+      <p class="mood__why" data-for="1"><strong>Kitchen Light, 93.1.</strong> Dessa talks to the other people who are awake for work. You hear that the night shift is a crowd, and the songs keep a steady pace for it.</p>
+      <p class="mood__why" data-for="3"><strong>Request Hour, 101.2.</strong> Wren plays one song in full for each card. Write yours below and it joins the line.</p>
+      <p class="mood__why" data-for="4"><strong>First Bus, 105.8.</strong> Cass opens with the weather from the window. It is the gentlest way into a day that has not started yet.</p>
+      <p class="mood__why" data-for="clock" data-clock-why><strong>Not sure is fine.</strong> We tune to whatever is on air by your own clock, and to Last Tram Home when the station is off air.</p>
+    </div>
+  </section>
+
+  <section class="panel lab" id="lab" aria-labelledby="h-lab">
+    <h2 id="h-lab">Set the grain yourself.</h2>
+    <p class="lead">Every picture here is noise and four colours. Change them and keep the result.</p>
+    <figure class="mirror" data-mirror-wrap><canvas data-mirror aria-hidden="true"></canvas></figure>
+    <form class="controls" data-controls onsubmit="return false">
+      <label class="ctl"><span class="ctl__top"><span>Grain</span><output data-out="grain">60</output></span><input type="range" min="0" max="100" value="60" data-ctl="grain"></label>
+      <label class="ctl"><span class="ctl__top"><span>Warp</span><output data-out="warp">50</output></span><input type="range" min="0" max="100" value="50" data-ctl="warp"></label>
+      <fieldset class="stops">
+        <legend>Colour stops, dark to light</legend>
+        <label class="stop"><input type="color" value="#2a1a16" data-stop="0"><span>Stop 1</span></label>
+        <label class="stop"><input type="color" value="#8a2a1e" data-stop="1"><span>Stop 2</span></label>
+        <label class="stop"><input type="color" value="#e8745c" data-stop="2"><span>Stop 3</span></label>
+        <label class="stop"><input type="color" value="#f4c98a" data-stop="3"><span>Stop 4</span></label>
+      </fieldset>
+      <div class="ctl__btns">
+        <button type="button" class="btn" data-poster>Save as poster</button>
+        <button type="button" class="btn btn--ghost" data-freeze aria-pressed="false">Freeze the field</button>
+        <button type="button" class="btn btn--ghost" data-reset>Reset</button>
+      </div>
+      <p class="ctl__note" role="status" data-poster-note>The poster is a 1600 by 2000 PNG made on this page. It does not leave your device.</p>
+    </form>
+  </section>
+</div>
+
+<!-- 5 tonight -->
+<section class="night" id="schedule" aria-labelledby="h-night">
+  <div class="container">
+    <h2 id="h-night">Tonight runs ten until six.</h2>
+    <div class="clock" data-clock>
+      <p class="clock__status" role="status" data-status>Checking your clock.</p>
+      <div class="clock__try">
+        <label for="t-try">Check another time</label>
+        <input id="t-try" type="time" data-try>
+        <button type="button" class="btn btn--ghost" data-try-reset>Use my clock</button>
+      </div>
+    </div>
+    <div class="tl" data-tl>
+      <div class="tl__scale" aria-hidden="true">
+        <span style="--at:0%">22</span><span style="--at:12.5%">23</span><span style="--at:25%">00</span><span style="--at:37.5%">01</span><span style="--at:50%">02</span><span style="--at:62.5%">03</span><span style="--at:75%">04</span><span style="--at:87.5%">05</span><span class="end" style="--at:100%">06</span>
+      </div>
+      <div class="tl__bar" aria-hidden="true">
+        <span class="tl__blk grain st1" style="--hours:2"></span><span class="tl__blk grain st2" style="--hours:1.5"></span><span class="tl__blk grain st3" style="--hours:1.5"></span><span class="tl__blk grain st4" style="--hours:1.5"></span><span class="tl__blk grain st5" style="--hours:1.5"></span>
+        <span class="tl__now" data-now hidden></span>
+      </div>
+    </div>
+    <ol class="plan">
+      <li class="show" data-show="0">
+        <div class="show__who"><p class="show__f">89.3</p><h3>Last Tram Home</h3><p class="show__meta">Marlo Quist, 22:00 to 00:00</p><button type="button" class="btn btn--ghost" data-goto="0">Tune the dial to 89.3</button></div>
+        <ol class="segs">
+          <li data-at="0"><span class="seg__t">22:00</span><span class="seg__n">Platform Notes</span><span class="seg__d">Marlo reads the day’s last timetable notes and opens the window seat.</span></li>
+          <li data-at="30"><span class="seg__t">22:30</span><span class="seg__n">The Slow Carriage</span><span class="seg__d">Long records for long rides, chosen so you do not need to change seats.</span></li>
+          <li data-at="60"><span class="seg__t">23:00</span><span class="seg__n">Window Seat Record</span><span class="seg__d">One album side start to end, with no talking at all.</span></li>
+          <li data-at="90"><span class="seg__t">23:30</span><span class="seg__n">Last Call for the Line</span><span class="seg__d">A quiet closing set that hands the night to the kitchen.</span></li>
+        </ol>
+      </li>
+      <li class="show" data-show="1">
+        <div class="show__who"><p class="show__f">93.1</p><h3>Kitchen Light</h3><p class="show__meta">Dessa Ibarra, 00:00 to 01:30</p><button type="button" class="btn btn--ghost" data-goto="1">Tune the dial to 93.1</button></div>
+        <ol class="segs">
+          <li data-at="120"><span class="seg__t">00:00</span><span class="seg__n">What Is on the Stove</span><span class="seg__d">Dessa names her pan, then reads the pans listeners have written in about.</span></li>
+          <li data-at="150"><span class="seg__t">00:30</span><span class="seg__n">The Night Shift Line</span><span class="seg__d">Talk with the people who are working while the town sleeps.</span></li>
+          <li data-at="180"><span class="seg__t">01:00</span><span class="seg__n">The Last Dish</span><span class="seg__d">A recipe read slowly, then one song to go with it.</span></li>
+        </ol>
+      </li>
+      <li class="show" data-show="2">
+        <div class="show__who"><p class="show__f">97.5</p><h3>The Long Quiet</h3><p class="show__meta">Teodor Pell, 01:30 to 03:00</p><button type="button" class="btn btn--ghost" data-goto="2">Tune the dial to 97.5</button></div>
+        <ol class="segs">
+          <li data-at="210"><span class="seg__t">01:30</span><span class="seg__n">First Words</span><span class="seg__d">Teodor speaks once, plays the empty room he recorded, and goes quiet.</span></li>
+          <li data-at="240"><span class="seg__t">02:00</span><span class="seg__n">Slow Sound</span><span class="seg__d">An unbroken ambient set. No announcements, no titles.</span></li>
+          <li data-at="270"><span class="seg__t">02:30</span><span class="seg__n">Second Words</span><span class="seg__d">The only other time he talks. He says goodnight and lets the tone fade.</span></li>
+        </ol>
+      </li>
+      <li class="show" data-show="3">
+        <div class="show__who"><p class="show__f">101.2</p><h3>Request Hour</h3><p class="show__meta">Wren Adeyemi, 03:00 to 04:30</p><button type="button" class="btn btn--ghost" data-goto="3">Tune the dial to 101.2</button></div>
+        <ol class="segs">
+          <li data-at="300"><span class="seg__t">03:00</span><span class="seg__n">Cards on the Desk</span><span class="seg__d">Wren reads each card in the order it arrived, crossed-out lines included.</span></li>
+          <li data-at="330"><span class="seg__t">03:30</span><span class="seg__n">The One Song</span><span class="seg__d">Each requested song is played in full, with the card read just before it.</span></li>
+          <li data-at="360"><span class="seg__t">04:00</span><span class="seg__n">Late Cards</span><span class="seg__d">The cards that came in during the show, read before the hour ends.</span></li>
+        </ol>
+      </li>
+      <li class="show" data-show="4">
+        <div class="show__who"><p class="show__f">105.8</p><h3>First Bus</h3><p class="show__meta">Cass Orlov, 04:30 to 06:00</p><button type="button" class="btn btn--ghost" data-goto="4">Tune the dial to 105.8</button></div>
+        <ol class="segs">
+          <li data-at="390"><span class="seg__t">04:30</span><span class="seg__n">Weather from the Window</span><span class="seg__d">Cass looks outside first and says what she sees.</span></li>
+          <li data-at="420"><span class="seg__t">05:00</span><span class="seg__n">Songs for an Empty Street</span><span class="seg__d">Gentle records while the first lights come on.</span></li>
+          <li data-at="450"><span class="seg__t">05:30</span><span class="seg__n">First Bus Out</span><span class="seg__d">The sign-off. One last record as the bus leaves and the day begins.</span></li>
+        </ol>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- 6 how FM works -->
+<section class="band" id="band" aria-labelledby="h-band">
+  <div class="container band__grid">
+    <div class="band__head">
+      <h2 id="h-band">Why there is static between stations.</h2>
+      <figure class="band__fig">
+        <svg viewBox="0 0 640 260" role="img" aria-label="The FM band from 87.5 to 108 megahertz. Five stations stand up as tall peaks. Between them the line is a low jagged hiss.">
+          <defs>
+            <pattern id="hiss" width="14" height="30" patternUnits="userSpaceOnUse"><path d="M0 18 L3 6 L6 24 L9 10 L12 21 L14 18" fill="none" stroke="currentColor" stroke-width="1.5"/></pattern>
+          </defs>
+          <rect x="0" y="190" width="640" height="30" fill="url(#hiss)" class="hiss"/>
+          <line x1="0" y1="220" x2="640" y2="220" class="axis"/>
+          <g class="peaks">
+            <path d="M52 220 L58 80 L64 220 Z"/>
+            <path d="M182 220 L188 120 L194 220 Z"/>
+            <path d="M326 220 L332 60 L338 220 Z"/>
+            <path d="M440 220 L446 140 L452 220 Z"/>
+            <path d="M562 220 L568 100 L574 220 Z"/>
+          </g>
+          <g class="labels">
+            <text x="0" y="248">87.5</text>
+            <text x="58" y="70" text-anchor="middle">89.3</text>
+            <text x="188" y="110" text-anchor="middle">93.1</text>
+            <text x="332" y="50" text-anchor="middle">97.5</text>
+            <text x="446" y="130" text-anchor="middle">101.2</text>
+            <text x="568" y="90" text-anchor="middle">105.8</text>
+            <text x="640" y="248" text-anchor="end">108 MHz</text>
+          </g>
+        </svg>
+        <figcaption>The five Nightfall FM frequencies on the FM band. The low jagged line between them is the hiss you hear on an empty frequency.</figcaption>
+      </figure>
+    </div>
+    <ol class="facts">
+      <li><h3>A band of channels.</h3><p>In most countries FM broadcasting uses the band from 87.5 to 108 megahertz. A stereo station takes up roughly 200 kilohertz of it, so the band holds a lot of stations side by side if they are spaced out.</p></li>
+      <li><h3>Frequency, not strength.</h3><p>FM stands for frequency modulation. The sound moves the frequency of the carrier up and down while its strength stays level. Most natural noise changes strength, so an FM receiver can ignore much of it. That is why FM sounds cleaner than AM.</p></li>
+      <li><h3>Why the hiss.</h3><p>On an empty frequency there is no carrier to follow. The receiver turns up whatever is there, which is background radio noise from the sky, from electronics and from the receiver itself. It becomes a hiss. Many modern radios mute it, and older ones let you hear it.</p></li>
+      <li><h3>One signal wins.</h3><p>When two stations share a frequency, an FM receiver locks onto the stronger one and largely drops the weaker. Turn the dial slowly past a station and you hear the hiss fall away as the receiver finds it.</p></li>
+      <li><h3>Night is different for AM.</h3><p>After dark, medium-wave AM signals can bounce off the upper atmosphere and travel hundreds of miles, so far away stations arrive and crowd each other. FM signals at around 100 megahertz mostly pass straight through that layer, so they stay close to line of sight and reach about the same distance day and night.</p></li>
+      <li><h3>The odd quiet night.</h3><p>On some calm, clear nights, layers of air at different temperatures can carry an FM signal past the horizon. It is the exception, and it is why now and then you catch a station from another town.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 7 voices -->
+<section class="voices" id="voices" aria-labelledby="h-voices">
+  <div class="container">
+    <h2 id="h-voices">Five voices, one microphone.</h2>
+    <ul class="hosts">
+      <li class="host">
+        <p class="host__name">Marlo Quist</p>
+        <span class="host__bar grain st1" aria-hidden="true"></span>
+        <div class="host__txt">
+          <p class="host__show">Last Tram Home, 89.3</p>
+          <p>Marlo keeps a paper timetable of every tram that no longer runs, and reads a line from it before the first record. He chooses songs by how they sound through a window at speed, and he never talks over an intro.</p>
+          <p>Listen for his pauses. He leaves a full breath of silence after each song so the ride has somewhere to settle.</p>
+        </div>
+      </li>
+      <li class="host">
+        <p class="host__name">Dessa Ibarra</p>
+        <span class="host__bar grain st2" aria-hidden="true"></span>
+        <div class="host__txt">
+          <p class="host__show">Kitchen Light, 93.1</p>
+          <p>Dessa opens every show by naming what is on her own stove, and asks listeners to do the same. She treats a pan on a low flame as the start of a conversation.</p>
+          <p>Listen for the way she answers a message. She reads it plainly, then picks the song that fits the dish, not the person.</p>
+        </div>
+      </li>
+      <li class="host">
+        <p class="host__name">Teodor Pell</p>
+        <span class="host__bar grain st3" aria-hidden="true"></span>
+        <div class="host__txt">
+          <p class="host__show">The Long Quiet, 97.5</p>
+          <p>Teodor records the sound of the empty room before every set and plays it first. He believes a room tells you how loud the night is, and that the music should start just below it.</p>
+          <p>Listen for the two times he speaks. He keeps both short enough to forget.</p>
+        </div>
+      </li>
+      <li class="host">
+        <p class="host__name">Wren Adeyemi</p>
+        <span class="host__bar grain st4" aria-hidden="true"></span>
+        <div class="host__txt">
+          <p class="host__show">Request Hour, 101.2</p>
+          <p>Wren reads every request card aloud, crossed-out lines included, because she thinks the line you almost wrote tells her as much as the one you kept. She plays each song in full.</p>
+          <p>Listen for the moment between the card and the first note. She leaves it empty on purpose.</p>
+        </div>
+      </li>
+      <li class="host">
+        <p class="host__name">Cass Orlov</p>
+        <span class="host__bar grain st5" aria-hidden="true"></span>
+        <div class="host__txt">
+          <p class="host__show">First Bus, 105.8</p>
+          <p>Cass gives the weather from the studio window, never from a screen. If it is raining she says how it sounds on the glass, and if it is clear she describes the first colour in the sky.</p>
+          <p>Listen for her sign-off. It is always the same sentence about the bus, and it is how regulars know the night is over.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- 8 request wall -->
+<section class="request"id="request" aria-labelledby="h-request">
+  <div class="container request__grid">
+    <div class="request__intro">
+      <h2 id="h-request">Ask the night for a song.</h2>
+      <p class="request__note">This is a concept site. Nothing you write here is sent anywhere. Your cards stay in this browser, on this device, and you can remove them whenever you like.</p>
+    </div>
+    <form class="card" data-form novalidate>
+      <div class="fld">
+        <label for="f-name">Your name, if you want it read out</label>
+        <input id="f-name" name="name" type="text" autocomplete="given-name" maxlength="40">
+      </div>
+      <div class="fld">
+        <label for="f-song">Song and artist</label>
+        <input id="f-song" name="song" type="text" required maxlength="90" aria-describedby="f-song-err">
+        <p class="fld__err" id="f-song-err" role="alert" hidden>Add a song and an artist so Wren has something to read.</p>
+      </div>
+      <div class="fld">
+        <label for="f-station">Which station</label>
+        <select id="f-station" name="station">
+          <option value="3">Request Hour, 101.2</option>
+          <option value="0">Last Tram Home, 89.3</option>
+          <option value="1">Kitchen Light, 93.1</option>
+          <option value="2">The Long Quiet, 97.5</option>
+          <option value="4">First Bus, 105.8</option>
+        </select>
+      </div>
+      <div class="fld">
+        <label for="f-note">A line to go with it</label>
+        <textarea id="f-note" name="note" rows="3" maxlength="200"></textarea>
+      </div>
+      <button type="submit" class="btn">Put it on the wall</button>
+      <p class="fld__ok" role="status" data-ok hidden>Added to your wall below. Nothing was sent anywhere, so nobody will read it out.</p>
+    </form>
+    <div class="wall" aria-labelledby="h-wall">
+      <h3 id="h-wall">Your wall</h3>
+      <p class="wall__empty" data-wall-empty>No cards yet. Your cards will show here and stay on this device.</p>
+      <ul class="wall__list" data-wall></ul>
+    </div>
+  </div>
+</section>
+
+<!-- 9 rules -->
+<section class="rules" id="rules" aria-labelledby="h-rules">
+  <div class="container">
+    <h2 id="h-rules">House rules after midnight.</h2>
+    <div class="acc">
+      <details name="rules"><summary>No adverts between midnight and six.</summary><p>The room sounds better without a jingle.</p></details>
+      <details name="rules"><summary>Every request card gets read.</summary><p>Write something you would say aloud. Wren reads the crossed-out parts too.</p></details>
+      <details name="rules"><summary>Nothing lives at 100.0.</summary><p>Between the stations there is only static, and we leave it on air on purpose.</p></details>
+      <details name="rules"><summary>The grain stays in.</summary><p>We would rather look like film left in a hot car than like a clean render.</p></details>
+      <details name="rules"><summary>Sound is yours to switch on.</summary><p>This page stays silent and loads no music until you press the sound button. Press it again and everything stops.</p></details>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="container foot__row">
+    <p class="foot__brand">Nightfall FM</p>
+    <p>Concept site for a fictional brand.</p>
+    <p>Photo credits: none. The pictures are generated in your browser.</p>
+    <p>Fonts: Clash Display and Satoshi, from Fontshare.</p>
+  </div>
+  <div class="container foot__music">
+    <h2 class="foot__h">Music credits</h2>
+    <p>The songs are real recordings by the artists named next to each one. They are streamed from Wikimedia Commons and the Internet Archive and are not stored on this site. Each is shared under CC0, public domain, CC BY or CC BY-SA, and every song links to its source page and licence. The static between stations is made in your browser. If a channel cannot load, the page plays a short generated set instead.</p>
+    <noscript><p>The full song list needs JavaScript. The sources are Wikimedia Commons (commons.wikimedia.org) and the Internet Archive (archive.org).</p></noscript>
+    <details class="credits" data-credits>
+      <summary>All music credits</summary>
+      <div data-credits-list></div>
+    </details>
+  </div>
+</footer>
+
+<dialog class="addlist" data-add-dialog aria-labelledby="add-title">
+  <h2 id="add-title" data-add-title>Add to a playlist</h2>
+  <div data-add-body></div>
+  <button type="button" class="btn btn--ghost" data-add-close>Close</button>
+</dialog>
+
+<div class="bar" data-bar hidden role="region" aria-label="Music player">
+  <div class="bar__busy" data-busy hidden role="alert"><span>The music source is busy. Try again in a minute.</span><button type="button" class="btn btn--sm" data-busy-retry>Retry</button><button type="button" class="btn btn--ghost btn--sm" data-busy-gen>Play the generated set</button></div>
+  <button type="button" class="bar__info" data-b="expand" aria-expanded="false" aria-label="Show or hide all player controls">
+    <span class="bar__title" data-b="title"></span>
+    <span class="bar__artist" data-b="artist"></span>
+    <span class="bar__from" data-b="from"></span>
+  </button>
+  <div class="bar__ctl">
+    <button type="button" class="ib" data-b="prev" aria-label="Previous song"></button>
+    <button type="button" class="ib ib--main" data-b="play" aria-label="Play"></button>
+    <button type="button" class="ib" data-b="next" aria-label="Next song"></button>
+  </div>
+  <div class="bar__seek bar__more">
+    <span data-b="cur">0:00</span>
+    <input type="range" min="0" max="1" value="0" step="1" data-b="seek" aria-label="Seek in the song">
+    <span data-b="dur">0:00</span>
+  </div>
+  <div class="bar__ext bar__more">
+    <button type="button" class="ib" data-b="shuffle" aria-label="Shuffle" aria-pressed="false"></button>
+    <button type="button" class="ib" data-b="repeat" aria-label="Repeat: off" data-mode="off"></button>
+    <button type="button" class="ib" data-b="like" aria-label="Like this song" aria-pressed="false"></button>
+    <button type="button" class="ib" data-b="queue" aria-label="Open the queue" data-n="0"></button>
+    <button type="button" class="ib" data-b="mute" aria-label="Mute" aria-pressed="false"></button>
+    <input type="range" class="bar__vol" min="0" max="100" value="60" data-vol aria-label="Volume of the player">
+    <button type="button" class="ib" data-b="close" aria-label="Close the player and turn sound off"></button>
+  </div>
+</div>
+
+<script src="tracks.js"></script>
+<script src="player.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
